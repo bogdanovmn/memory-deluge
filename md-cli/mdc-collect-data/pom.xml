@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.github.bogdanovmn.memorydeluge</groupId>
+        <artifactId>md-cli</artifactId>
+        <version>${revision}</version>
+    </parent>
+
+    <artifactId>mdc-collect-data</artifactId>
+    <version>${revision}</version>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <skipAssembly>false</skipAssembly>
+                    <finalName>collect-data</finalName>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.github.bogdanovmn.memorydeluge.cli.collectdata.App</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
