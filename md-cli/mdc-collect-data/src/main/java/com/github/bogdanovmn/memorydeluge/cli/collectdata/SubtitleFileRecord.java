@@ -12,12 +12,17 @@ class SubtitleFileRecord {
     LocalTime begin;
     LocalTime end;
     String text;
+    int interval;
 
     boolean isMusic() {
-        return false;
+        return text.contains("♪");
     }
 
     boolean isSound() {
-        return false;
+        return text.matches("^\\(.*\\)$");
+    }
+
+    int duration() {
+        return end.toSecondOfDay() - begin.toSecondOfDay();
     }
 }
