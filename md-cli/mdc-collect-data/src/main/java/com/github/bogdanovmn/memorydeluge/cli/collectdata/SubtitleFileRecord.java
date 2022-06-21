@@ -19,7 +19,11 @@ class SubtitleFileRecord {
     }
 
     boolean isSound() {
-        return text.matches("^\\(.*\\)$");
+        return text.matches("^[\\[(].*[\\])]$");
+    }
+
+    boolean isText() {
+        return !isMusic() && !isSound();
     }
 
     int duration() {

@@ -1,5 +1,7 @@
 package com.github.bogdanovmn.memorydeluge.cli.collectdata;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -10,7 +12,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
+@Slf4j
 public class SubtitleFile {
     private final String fileName;
 
@@ -27,10 +31,20 @@ public class SubtitleFile {
         int i = 0;
         SubtitleFileRecord previous = null;
         while (i < lines.size()) {
+            if (isBlank(lines.get(i))) {
+                i++;
+                continue;
+            }
             SubtitleFileRecord.SubtitleFileRecordBuilder currentRecord = SubtitleFileRecord.builder();
-            currentRecord.id(
-                Integer.parseInt(lines.get(i++).replaceAll("\\D", ""))
-            );
+            try {
+                currentRecord.id(
+                    Integer.parseInt(lines.get(i++).replaceAll("\\D", ""))
+                );
+            } catch (Exception ex) {
+                throw new IllegalStateException(
+                    String.format("File %s prev: %s", fileName, previous), ex
+                );
+            }
 
             Matcher matcher = TIME_FRAME_PATTERN.matcher(lines.get(i++));
             if (matcher.matches()) {
@@ -50,9 +64,13 @@ public class SubtitleFile {
             }
 
             String textLine = lines.get(i++);
+            while (isBlank(textLine)) {
+                textLine = lines.get(i++);
+            }
+
             StringBuilder text = new StringBuilder();
             int l = 1;
-            while (!textLine.isEmpty()) {
+            while (!isBlank(textLine)) {
                 if (l > 1) {
                     text.append("\n");
                 }
@@ -65,5 +83,15 @@ public class SubtitleFile {
             previous = result.get(result.size() - 1);
         }
         return result;
+    }
+
+    public List<SubtitleFileRecord> textRecords() throws IOException {
+        return records().stream()
+            .filter(SubtitleFileRecord::isText)
+            .collect(Collectors.toList());
+    }
+
+    private boolean isBlank(String str) {
+        return str.matches("^\\s*$");
     }
 }

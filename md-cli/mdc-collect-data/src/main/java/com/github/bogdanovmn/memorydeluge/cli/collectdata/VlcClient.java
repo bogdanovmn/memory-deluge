@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 @RequiredArgsConstructor
 @Slf4j
-class VlcCommand {
+class VlcClient {
     private final String vlcPath;
     private final String outputDir;
 

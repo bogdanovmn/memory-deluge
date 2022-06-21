@@ -20,3 +20,15 @@ how it's done.
 The carbos grow only where
 the serpent's bones lay.
 
+6
+00:29:55,010 --> 00:29:59,978
+
+Some phrase after empty string
+
+7
+00:00:07,023 --> 00:00:09,986
+[BOMBS EXPLODING]
+
+
+
+
