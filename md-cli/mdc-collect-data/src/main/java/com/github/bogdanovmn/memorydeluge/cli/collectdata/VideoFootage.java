@@ -1,5 +1,6 @@
 package com.github.bogdanovmn.memorydeluge.cli.collectdata;
 
+import com.github.bogdanovmn.common.concurrent.ConcurrentConsuming;
 import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 
@@ -14,7 +15,7 @@ class VideoFootage {
 
     void save() throws Exception {
         new ConcurrentConsuming(threadPoolSize)
-            .process(subtitleFile.textRecords(), this::makeScreenshot);
+            .consume(subtitleFile.textRecords(), this::makeScreenshot);
     }
 
     private void makeScreenshot(SubtitleFileRecord record) {
@@ -23,7 +24,7 @@ class VideoFootage {
                 ? 0
                 : record.duration() / 2
         );
-//        log.info("make a screenshot at {} second for {}", screenshotTimeOffset, record);
+        log.debug("make a screenshot at {} second for {}", screenshotTimeOffset, record);
         boolean result = dryRun || vlcClient.makeScreenshot(
             videoFileName, screenshotTimeOffset, record.id()
         );

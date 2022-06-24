@@ -12,7 +12,18 @@
 
     <artifactId>mdc-collect-data</artifactId>
     <version>${revision}</version>
+    <packaging>jar</packaging>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.github.bogdanovmn.common.core</groupId>
+            <artifactId>common-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.bogdanovmn.common</groupId>
+            <artifactId>common-concurrent</artifactId>
+        </dependency>
+    </dependencies>
     <build>
         <plugins>
             <plugin>
