@@ -1,6 +1,7 @@
 package com.github.bogdanovmn.memorydeluge.cli.collectdata;
 
 import com.github.bogdanovmn.common.files.Directory;
+import com.github.bogdanovmn.memorydeluge.videoplayer.ScreenshotCommand;
 import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 
@@ -16,7 +17,7 @@ import java.util.regex.Pattern;
 class VideoSeriesFootage {
     private final String videoSeriesSeasonDir;
     private final String seriesSeasonSubtitlesDir;
-    private final VlcClient vlcClient;
+    private final ScreenshotCommand screenshotCommand;
     private final int threadPoolSize;
     private final boolean dryRun;
 
@@ -41,10 +42,10 @@ class VideoSeriesFootage {
         for (String episode : episodeVideo.keySet()) {
             log.info("Process {}: video={} subtitles={}", episode, episodeVideo.get(episode), episodeSubtitle.get(episode));
             VideoFootage.builder()
-                .vlcClient(vlcClient)
+                .screenshotCommand(screenshotCommand)
                 .threadPoolSize(threadPoolSize)
                 .dryRun(dryRun)
-                .videoFileName(episodeVideo.get(episode).toString())
+                .videoFileName(episodeVideo.get(episode))
                 .subtitleFile(
                     new SubtitleFile(episodeSubtitle.get(episode).toString())
                 )

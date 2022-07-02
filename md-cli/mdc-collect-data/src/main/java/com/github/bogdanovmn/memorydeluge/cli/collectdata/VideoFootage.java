@@ -1,14 +1,17 @@
 package com.github.bogdanovmn.memorydeluge.cli.collectdata;
 
 import com.github.bogdanovmn.common.concurrent.ConcurrentConsuming;
+import com.github.bogdanovmn.memorydeluge.videoplayer.ScreenshotCommand;
 import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
+
+import java.nio.file.Path;
 
 @Slf4j
 @Builder
 class VideoFootage {
-    private final String videoFileName;
-    private final VlcClient vlcClient;
+    private final Path videoFileName;
+    private final ScreenshotCommand screenshotCommand;
     private final SubtitleFile subtitleFile;
     private final int threadPoolSize;
     private final boolean dryRun;
@@ -24,9 +27,11 @@ class VideoFootage {
                 ? 0
                 : record.duration() / 2
         );
-        log.debug("make a screenshot at {} second for {}", screenshotTimeOffset, record);
-        boolean result = dryRun || vlcClient.makeScreenshot(
-            videoFileName, screenshotTimeOffset, record.id()
+        if (log.isDebugEnabled() || dryRun) {
+            log.info("make a screenshot at {} second for {}", screenshotTimeOffset, record);
+        }
+        boolean result = dryRun || screenshotCommand.execute(
+            videoFileName, screenshotTimeOffset, String.valueOf(record.id())
         );
         if (!result) {
             throw new RuntimeException(

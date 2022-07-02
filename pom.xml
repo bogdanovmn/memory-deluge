@@ -17,6 +17,7 @@
 
     <modules>
         <module>md-core</module>
+        <module>md-video-player</module>
         <module>md-cli</module>
     </modules>
 
@@ -28,6 +29,11 @@
             <dependency>
                 <groupId>com.github.bogdanovmn.memorydeluge</groupId>
                 <artifactId>md-core</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.bogdanovmn.memorydeluge</groupId>
+                <artifactId>md-video-player</artifactId>
                 <version>${revision}</version>
             </dependency>
 

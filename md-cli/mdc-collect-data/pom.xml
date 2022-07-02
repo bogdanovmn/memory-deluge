@@ -20,6 +20,10 @@
             <artifactId>common-core</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.github.bogdanovmn.memorydeluge</groupId>
+            <artifactId>md-video-player</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.github.bogdanovmn.common</groupId>
             <artifactId>common-concurrent</artifactId>
         </dependency>
