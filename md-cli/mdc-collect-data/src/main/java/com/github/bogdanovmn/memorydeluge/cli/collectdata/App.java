@@ -36,7 +36,7 @@ public class App {
                 ARG_VIDEO_PLAYER_TYPE,
                 String.format("video player type: %s", Arrays.asList(VideoPlayer.values()))
             )
-            .withRequiredArg(ARG_VIDEO_PLAYER_PATH,   "video player executable path")
+            .withRequiredArg(ARG_VIDEO_PLAYER_PATH, "video player executable path")
             .withRequiredArg(ARG_OUTPUT_DIR, "where results have to be created")
             .withArg(
                 ARG_OUTPUT_FORMAT,
@@ -46,7 +46,7 @@ public class App {
                         DEFAULT_OUTPUT_FORMAT
                 )
             )
-            .withArg(ARG_THREAD_POOL_SIZE,   "workers thread pool size (default: 1)")
+            .withArg(ARG_THREAD_POOL_SIZE, "workers thread pool size (default: 1)")
 
             .withArg(ARG_VIDEO_FILE,     "video file name")
             .withArg(ARG_SUBTITLES_FILE, "file name with video's subtitles")
@@ -60,13 +60,14 @@ public class App {
 
             .withEntryPoint(
                 cmdLine -> {
-                    OutputFormat format = OutputFormat.valueOf(
-                        cmdLine.getOptionValue(ARG_OUTPUT_FORMAT, DEFAULT_OUTPUT_FORMAT.name())
-                    );
                     ScreenshotCommand screenshotCommand = ScreenshotCommandFactory.builder()
-                        .format(format)
                         .playerPath(Paths.get(cmdLine.getOptionValue(ARG_VIDEO_PLAYER_PATH)))
                         .outputDir(Paths.get(cmdLine.getOptionValue(ARG_OUTPUT_DIR)))
+                        .format(
+                            OutputFormat.valueOf(
+                                cmdLine.getOptionValue(ARG_OUTPUT_FORMAT, DEFAULT_OUTPUT_FORMAT.name())
+                            )
+                        )
                     .build().of(
                         VideoPlayer.valueOf(
                             cmdLine.getOptionValue(ARG_VIDEO_PLAYER_TYPE)

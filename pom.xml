@@ -13,12 +13,15 @@
         <java.version>1.8</java.version>
         <encoding>UTF-8</encoding>
         <revision>0.1.0</revision>
+        <spring-boot.version>2.5.1</spring-boot.version>
+        <common.version>1.9.0</common.version>
     </properties>
 
     <modules>
         <module>md-core</module>
         <module>md-video-player</module>
         <module>md-cli</module>
+        <module>md-viewer</module>
     </modules>
 
     <dependencyManagement>
@@ -36,6 +39,11 @@
                 <artifactId>md-video-player</artifactId>
                 <version>${revision}</version>
             </dependency>
+            <dependency>
+                <groupId>com.github.bogdanovmn.memorydeluge</groupId>
+                <artifactId>mdv-model</artifactId>
+                <version>${revision}</version>
+            </dependency>
 
             <!-- My Libs -->
 
@@ -47,15 +55,24 @@
             <dependency>
                 <groupId>com.github.bogdanovmn.common.core</groupId>
                 <artifactId>common-core</artifactId>
-                <version>1.9.0</version>
+                <version>${common.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.bogdanovmn.common</groupId>
                 <artifactId>common-concurrent</artifactId>
-                <version>1.9.0</version>
+                <version>${common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.bogdanovmn.common.spring</groupId>
+                <artifactId>common-spring</artifactId>
+                <version>${common.version}</version>
             </dependency>
             <!-- Others -->
-
+            <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>42.5.0</version>
+            </dependency>
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
@@ -80,6 +97,16 @@
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
                 <version>5.7.2</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Spring -->
+            <dependency>
+                <!-- Import dependency management from Spring Boot -->
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
