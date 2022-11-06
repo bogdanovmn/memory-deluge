@@ -1,11 +1,11 @@
 package com.github.bogdanovmn.memorydeluge.viewer.web.app.user;
 
-import com.github.bogdanovmn.memorydeluge.viewer.web.app.AbstractVisualController;
+import com.github.bogdanovmn.memorydeluge.viewer.model.entity.User;
+import com.github.bogdanovmn.memorydeluge.viewer.model.entity.UserRepository;
+import com.github.bogdanovmn.memorydeluge.viewer.web.app.AbstractController;
 import com.github.bogdanovmn.memorydeluge.viewer.web.app.FormErrors;
 import com.github.bogdanovmn.memorydeluge.viewer.web.app.HeadMenu;
 import com.github.bogdanovmn.memorydeluge.viewer.web.app.config.security.Md5PasswordEncoder;
-import com.github.bogdanovmn.memorydeluge.viewer.model.entity.User;
-import com.github.bogdanovmn.memorydeluge.viewer.model.entity.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
@@ -23,17 +23,12 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/user/settings")
-class UserSettingsController extends AbstractVisualController {
+class UserSettingsController extends AbstractController {
     private final UserRepository userRepository;
 
     @Autowired
     UserSettingsController(UserRepository userRepository) {
         this.userRepository = userRepository;
-    }
-
-    @Override
-    protected HeadMenu.ITEM currentMenuItem() {
-        return HeadMenu.ITEM.SETTINGS;
     }
 
     @InitBinder

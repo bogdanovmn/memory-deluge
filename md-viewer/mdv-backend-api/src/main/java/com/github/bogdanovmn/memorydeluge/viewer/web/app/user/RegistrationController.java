@@ -1,9 +1,8 @@
 package com.github.bogdanovmn.memorydeluge.viewer.web.app.user;
 
-import com.github.bogdanovmn.memorydeluge.viewer.web.app.AbstractMinVisualController;
+import com.github.bogdanovmn.memorydeluge.viewer.model.entity.Invite;
 import com.github.bogdanovmn.memorydeluge.viewer.web.app.FormErrors;
 import com.github.bogdanovmn.memorydeluge.viewer.web.app.HeadMenu;
-import com.github.bogdanovmn.memorydeluge.viewer.model.entity.Invite;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +18,7 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/registration")
-class RegistrationController extends AbstractMinVisualController {
+class RegistrationController {
     private final RegistrationService registrationService;
 
     @Autowired

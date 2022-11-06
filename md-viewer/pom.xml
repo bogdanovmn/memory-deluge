@@ -15,7 +15,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>mdv-web-app</module>
+        <module>mdv-backend-api</module>
         <module>mdv-model</module>
     </modules>
 

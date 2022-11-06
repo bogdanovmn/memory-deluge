@@ -1,6 +1,6 @@
 package com.github.bogdanovmn.memorydeluge.viewer.web.app.user;
 
-import com.github.bogdanovmn.memorydeluge.viewer.web.app.AbstractMinVisualController;
+import com.github.bogdanovmn.memorydeluge.viewer.web.app.AbstractController;
 import com.github.bogdanovmn.memorydeluge.viewer.web.app.HeadMenu;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-class LoginController extends AbstractMinVisualController {
+class LoginController extends AbstractController {
     @GetMapping("/login")
     ModelAndView form(Model model, String error) {
         if (getUser() != null) {
