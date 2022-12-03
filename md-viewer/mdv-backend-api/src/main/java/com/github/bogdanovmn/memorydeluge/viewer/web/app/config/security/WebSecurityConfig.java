@@ -1,7 +1,5 @@
 package com.github.bogdanovmn.memorydeluge.viewer.web.app.config.security;
 
-import com.github.bogdanovmn.memorydeluge.viewer.web.app.HeadMenu;
-import com.github.bogdanovmn.memorydeluge.viewer.model.entity.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,7 +8,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -38,26 +35,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-            .antMatchers("/registration/**").anonymous()
-            .antMatchers("/webjars/**").permitAll()
-            .antMatchers("/css/**").permitAll()
-            .antMatchers("/admin/**").hasAuthority(UserRole.Type.Admin.name())
-            .antMatchers("/invites/**").hasAuthority(UserRole.Type.Invite.name())
             .anyRequest().authenticated()
 
-            .and().formLogin()
-            .loginPage("/login")
-            .defaultSuccessUrl(HeadMenu.DEFAULT_PAGE, true)
-            .permitAll()
-
-            .and().logout()
-            .logoutRequestMatcher(
-                new AntPathRequestMatcher("/logout")
-            )
-            .logoutSuccessUrl("/login")
-            .permitAll()
-
-            .and().csrf()
-            .disable();
+            .and().csrf().disable();
     }
 }
